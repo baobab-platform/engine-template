@@ -1,10 +1,10 @@
-# Target path: <new-repo>/.nabhold/environment.yaml (drop the .example
+# Target path: <new-repo>/.baobab/environment.yaml (drop the .example
 # suffix once every TODO below is resolved - see TEMPLATE-USAGE.md step 3).
 #
 # Conforms to:
-#   nabhold/shared/contracts/development-environment/schema.yaml (v1.0)
+#   baobab-platform/shared/contracts/development-environment/schema.yaml (v1.0)
 # Governing decision:
-#   nabhold/shared/docs/adr/ADR-0001
+#   baobab-platform/shared/docs/adr/ADR-0001
 #
 # Before filling this in: read schema.yaml's `profiles` section and pick
 # the NARROWEST profile that actually covers this engine's real needs, not
@@ -27,7 +27,7 @@
 #                 if it happens to be Node-only.
 #   - frontend-e2e is CI-only, never a repo's primary devcontainer profile.
 #   - infra       Terraform + AWS CLI only, no application language
-#                 runtimes at all. Used by nabhold/infrastructure only.
+#                 runtimes at all. Used by baobab-platform/infrastructure only.
 #
 # Confirm the current baobab-dev release tag (check its CHANGELOG.md /
 # GHCR package page - do not assume any version number written elsewhere,
@@ -36,7 +36,7 @@
 # .devcontainer/devcontainer.json.
 
 schema:
-  name: "nabhold-development-environment-contract"
+  name: "baobab-platform-development-environment-contract"
   version: "1.0"
 
 application:
@@ -72,4 +72,4 @@ validation:
     - "TODO"
 
 notes:
-  - "Codespaces uses ghcr.io/nabhold/baobab-dev:<TODO: same tag as minimum_version above>."
+  - "Codespaces uses ghcr.io/baobab-platform/baobab-dev:<TODO: same tag as minimum_version above>."

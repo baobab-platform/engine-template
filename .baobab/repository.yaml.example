@@ -1,0 +1,13 @@
+# Target path: <new-repo>/.baobab/repository.yaml
+schema_version: 1
+repository:
+  lifecycle: experimental
+capabilities:
+  - engine
+  # Add only capabilities backed by real repository evidence.
+environment:
+  baobab_dev:
+    required: true
+    profile: full # Choose the narrowest applicable profile.
+artifacts:
+  container: false # Set true only when the repository publishes a container artifact.
