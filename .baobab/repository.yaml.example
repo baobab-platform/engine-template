@@ -10,4 +10,9 @@ environment:
     required: true
     profile: full # Choose the narrowest applicable profile.
 artifacts:
-  container: false # Set true only when the repository publishes a container artifact.
+  container: false # Or use the object below when an artifact is published.
+  # container:
+  #   enabled: true
+  #   dockerfile: Dockerfile
+  #   context: .
+  #   runtime: true # false only for static OCI bundles such as contract archives.
