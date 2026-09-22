@@ -8,15 +8,15 @@
 //
 // PATTERN A - no local backing services (bare image), e.g. a pure
 // frontend or a service that only talks to already-deployed dependencies
-// during local development. See nabhold/baobab-trade or
-// nabhold/baobab-pulse's devcontainer.json for a live reference (both
+// during local development. See baobab-platform/baobab-trade or
+// nbaobab-platform/baobab-pulse's devcontainer.json for a live reference (both
 // still have a docker-compose.yml alongside for CI/manual use, but their
 // devcontainer.json does not wire to it - a contributor starts those
 // services with a separate `docker compose up` if they need them).
 //
 // PATTERN B - devcontainer runs AS one of docker-compose.yml's services,
 // so opening the repo in a devcontainer brings up its databases/queues
-// automatically. See nabhold/baobab-erp's devcontainer.json +
+// automatically. See baobab-platform/baobab-erp's devcontainer.json +
 // .devcontainer/docker-compose.yml for a live reference. Prefer this
 // pattern for a new engine that needs a database or message broker
 // locally - it gives a one-step "reopen in container" experience instead

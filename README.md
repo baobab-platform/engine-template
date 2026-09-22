@@ -1,4 +1,4 @@
-<!-- Target path: nabhold/engine-template/README.md (becomes <new-repo>/README.md in any repo created from this template). -->
+<!-- Target path: baobab-platform/engine-template/README.md (becomes <new-repo>/README.md in any repo created from this template). -->
 
 # <engine-repo-name>
 
@@ -6,10 +6,10 @@
   TODO before this repo's first real PR merges — then delete this comment block:
   1. Replace the title above with the real repo name (e.g. `baobab-iam`), matching
      the naming convention: short, hyphenated, no `-engine`/`-control-plane` suffix
-     (see nabhold/baobab-cp, nabhold/baobab-trade, nabhold/baobab-erp,
-     nabhold/baobab-pulse, nabhold/baobab-cms for precedent).
+     (see baobab-platform/baobab-cp, baobab-platform/baobab-trade, baobab-platform/baobab-erp,
+     baobab-platform/baobab-pulse, baobab-platform/baobab-cms for precedent).
   2. Replace ADR-000N below with the real ADR number recording this engine's
-     addition to the ecosystem. File it in nabhold/shared/docs/adr/, continuing
+     addition to the ecosystem. File it in baobab-platform/shared/docs/adr/, continuing
      the existing sequence (see that repo's docs/adr/ for the next free number).
   3. Fill in the "Role", "Ownership", and "Contract dependencies" sections below
      with what's actually true for this engine — do not leave the placeholder
@@ -25,10 +25,10 @@
 
 One paragraph: what this engine owns, in the ecosystem's own vocabulary — and,
 just as important, what it explicitly does *not* own (business logic that
-belongs to another engine, contracts that belong to `nabhold/shared`,
-infrastructure that belongs to `nabhold/infrastructure`). Model this on the
+belongs to another engine, contracts that belong to `baobab-platform/shared`,
+infrastructure that belongs to `baobab-platform/infrastructure`). Model this on the
 "Role" section of an existing repo's README rather than writing it from
-scratch — see `nabhold/infrastructure`'s README for the shape.
+scratch — see `baobab-platform/infrastructure`'s README for the shape.
 
 ## Ownership
 
@@ -42,16 +42,16 @@ It must not contain:
 
 ## Contract dependencies
 
-Note which `nabhold/shared` contracts this engine consumes or publishes
+Note which `baobab-platform/shared` contracts this engine consumes or publishes
 (event schemas, API contracts, the Development Environment Contract), and at
-what pinned version/tag — e.g. `nabhold/shared@v1`. Do not commit to a
+what pinned version/tag — e.g. `baobab-platform/shared@v1`. Do not commit to a
 contract here until it's actually confirmed; an empty scaffold doesn't need
 one yet.
 
 ## Local development
 
 This repository uses the shared `baobab-dev` devcontainer image. See
-`.nabhold/environment.yaml` for the declared profile and required
+`.baobab/environment.yaml` for the declared profile and required
 capabilities, and `.devcontainer/devcontainer.json` for the pinned image tag.
 
 (Both of those are still `.example` files until this repo's language stack
