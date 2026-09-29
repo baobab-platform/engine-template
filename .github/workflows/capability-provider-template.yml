@@ -16,10 +16,10 @@
 #   should delete this workflow together with the .example file.
 #
 # SHARED PIN:
-#   SHARED_REF is the baobab-platform/shared commit that introduced
-#   scripts/capability_catalogue.py (ADR-SHARED-017 implementation). Move it
-#   to the merge commit on shared's main once that change merges, and
-#   forward whenever the provider-declaration contract changes.
+#   SHARED_REF is the merge commit on baobab-platform/shared main of
+#   shared#141, which introduced scripts/capability_catalogue.py
+#   (ADR-SHARED-017). Move it forward whenever the provider-declaration
+#   contract changes.
 # ==============================================================================
 
 name: Capability Provider Template
@@ -40,7 +40,7 @@ permissions:
   contents: read
 
 env:
-  SHARED_REF: 7a6684796df5a1a1735e91f802be4df44ef03004
+  SHARED_REF: 66b0178312694c4391bc53de56f912e8b455a571
 
 jobs:
   conformance:
