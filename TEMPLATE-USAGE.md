@@ -104,6 +104,40 @@ requirement to do the rest immediately.
         instead if so).
       - `pages.yml.example` — only if this repo publishes docs via the
         org's Zensical/uv toolchain.
+- [ ] Declare this engine's capability providers: copy
+      `.baobab/capability-provider.yaml.example` to
+      `.baobab/capability-provider.yaml` and replace every placeholder (see
+      "The three `.baobab` files" below). Reference only capabilities that
+      are already in `baobab-platform/shared`'s
+      `contracts/capability/v1/catalogue.yaml`. Anything not yet canonical
+      goes under `planned_capabilities` with a `proposed_key`, and new
+      canonical capabilities are proposed to Shared first. Then delete the
+      `.example` file and `.github/workflows/capability-provider-template.yml`.
 - [ ] Fill in `contracts/README.md` with the actual contract(s) this engine
       consumes or publishes, or delete it if none apply yet.
 - [ ] Delete this file.
+
+## The three `.baobab` files
+
+Each answers a different question, and each uses the word "capability"
+differently. Never copy a value from one into another.
+
+| File | Question | Its "capabilities" | Contract |
+|---|---|---|---|
+| `.baobab/repository.yaml` | What kind of repository is this, and which Foundation controls apply? | Foundation technical traits: `engine`, `node`, `container` | `baobab-platform/shared/.baobab/repository.schema.json` (ADR-0020) |
+| `.baobab/environment.yaml` | Which `baobab-dev` toolchain does development need? | `validation.required_capabilities`: `languages.node`, `database.postgresql` | `baobab-platform/shared/contracts/development-environment/schema.yaml` |
+| `.baobab/capability-provider.yaml` | Which canonical Baobab domain capabilities do this engine's providers implement, or plan to? | Canonical keys from Shared's `catalogue.yaml`: `payment.payment.capture` | `baobab-platform/shared/contracts/capability/v1/provider-declaration.schema.json` (ADR-SHARED-017) |
+
+`capability-provider.yaml` names the engine (`engine_id`, which is this
+repository's name) and its providers (`<engine-id>.<provider-name>`, with
+the technology in `implementation_key`). For each provider it lists the
+supported capabilities, their contract majors, `PARTIAL` or `IMPLEMENTED`
+status, and evidence. It never states certification (EA-09), activation,
+bindings, grants, engine instances or health: the Control Plane owns
+those. Validate it against a Shared checkout:
+
+```bash
+python3 <shared>/scripts/capability_catalogue.py validate-declaration \
+  .baobab/capability-provider.yaml --engine-id <engine-id> --repository-root .
+```
+
