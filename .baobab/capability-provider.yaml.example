@@ -1,0 +1,97 @@
+# Baobab Capability Provider Declaration
+#
+# Purpose:
+#   Declares which canonical Baobab capabilities this engine/provider
+#   implementation supports or formally plans to support.
+#
+# Authority boundaries:
+#   - Shared defines canonical Capability semantics and contracts.
+#   - This repository declares implementation support.
+#   - EA-09 / platform governance certifies support.
+#   - Control Plane determines activation, binding, topology and resolution.
+#
+# This file MUST NOT declare:
+#   - CapabilityGrants
+#   - CapabilityBindings
+#   - tenant entitlements
+#   - EngineInstances
+#   - health state
+#   - actual deployment topology
+
+schema_version: 1
+
+engine:
+  # Stable canonical Engine family identifier.
+  engine_key: baobab-payments
+
+provider:
+  # Stable CapabilityProvider implementation identity.
+  provider_key: baobab-payments.sandbox
+
+  # Provider category. Exact allowed values belong to Shared.
+  provider_type: BAOBAB_ENGINE
+
+  # This provider is technically usable for development/integration but
+  # is not eligible for production activation.
+  production_permitted: false
+
+supports:
+  - capability_key: payment.intent.create
+
+    # Canonical Shared contract major versions this implementation supports.
+    contract_versions:
+      - 1
+
+    # Describes implementation completeness only.
+    # It does not grant certification or runtime activation.
+    implementation_status: implemented
+
+    provenance:
+      authority:
+        repository: baobab-platform/baobab-payments
+        decision: ADR-PAY-0002
+
+    implementation_evidence:
+      - type: source
+        path: src/service.rs
+
+  - capability_key: payment.payment.authorize
+    contract_versions:
+      - 1
+    implementation_status: implemented
+
+    provenance:
+      authority:
+        repository: baobab-platform/baobab-payments
+        decision: ADR-PAY-0002
+
+  - capability_key: payment.payment.capture
+    contract_versions:
+      - 1
+    implementation_status: implemented
+
+    provenance:
+      authority:
+        repository: baobab-platform/baobab-payments
+        decision: ADR-PAY-0002
+
+  - capability_key: payment.refund.create
+    contract_versions:
+      - 1
+    implementation_status: implemented
+
+    provenance:
+      authority:
+        repository: baobab-platform/baobab-payments
+        decision: ADR-PAY-0002
+
+planned:
+  # Planned capabilities are visible to architecture/governance tooling
+  # but MUST NEVER participate in runtime CapabilityResolution.
+  - capability_key: payment.payout.execute
+    lifecycle: candidate
+
+    provenance:
+      authority:
+        repository: baobab-platform/baobab-payments
+        decision: ADR-PAY-0021

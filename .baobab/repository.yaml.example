@@ -1,0 +1,34 @@
+# Baobab Foundation Repository Contract
+#
+# Purpose:
+#   Describes what this repository technically is so Foundation CI can
+#   classify it and apply the correct engineering, security, runtime and
+#   artifact controls.
+#
+# This file does NOT declare Baobab domain capabilities such as
+# payment.capture or commerce.order.manage.
+
+schema_version: 1
+
+repository:
+  # New engine repositories normally begin experimental.
+  lifecycle: experimental
+
+# Foundation technical classifications only.
+# These are NOT Control Plane Capability keys.
+capabilities:
+  - engine
+  - documentation
+
+environment:
+  baobab_dev:
+    # Keep false until application development begins and
+    # .baobab/environment.yaml is activated.
+    required: false
+
+artifacts:
+  # No runtime artifact exists at scaffold stage.
+  container: false
+
+security:
+  sast_provider: fallback
