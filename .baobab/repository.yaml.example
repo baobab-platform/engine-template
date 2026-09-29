@@ -6,7 +6,14 @@
 #   artifact controls.
 #
 # This file does NOT declare Baobab domain capabilities such as
-# payment.capture or commerce.order.manage.
+# payment.payment.capture or commerce.cart.manage. Its `capabilities` are
+# Foundation technical traits only (engine, node, container, ...).
+#
+# The three .baobab contracts are distinct and never share values:
+#   repository.yaml          what kind of repository this is      <- this file
+#   environment.yaml         which baobab-dev toolchain it needs
+#   capability-provider.yaml which canonical Baobab capabilities its
+#                            providers implement (ADR-SHARED-017)
 
 schema_version: 1
 

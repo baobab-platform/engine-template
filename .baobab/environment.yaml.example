@@ -5,8 +5,10 @@
 #   build and test this repository.
 #
 # This file does NOT describe:
-#   - Baobab domain/business capabilities;
-#   - Control Plane CapabilityProviders;
+#   - Baobab domain/business capabilities or Control Plane
+#     CapabilityProviders -- those are .baobab/capability-provider.yaml
+#     (Shared capability/v1 provider-declaration.schema.json);
+#   - Foundation repository classification -- that is .baobab/repository.yaml;
 #   - production deployment topology;
 #   - application dependencies.
 #
