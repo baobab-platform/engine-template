@@ -1,12 +1,12 @@
 # ==============================================================================
-# Nabhold Engine Template
+# Baobab Engine Template
 # Greet First-Time Contributors
 #
 # File: .github/workflows/greetings.yml
 #
 # PURPOSE:
 #   Owns the trigger and the elevated issues/pull-requests permissions;
-#   delegates the greeting mechanism itself to nabhold/shared, per this org's
+#   delegates the greeting mechanism itself to baobab-platform/shared, per this org's
 #   "build common capabilities once, govern centrally" principle. A reusable
 #   workflow cannot declare its own repository-event trigger (only
 #   workflow_call), so this thin wrapper is the only place
@@ -38,7 +38,7 @@ jobs:
     permissions:
       issues: write
       pull-requests: write
-    # SHA is nabhold/shared's v1.2.0 tag (annotated tag - peeled commit, not
+    # SHA is baobab-platform/shared's v1.2.0 tag (annotated tag - peeled commit, not
     # the tag object's own SHA), verified via
     # `git rev-list -n1 v1.2.0^{}` against a live checkout on 2026-09-05.
     # Re-verify before relying on this pin if this template is more than a
