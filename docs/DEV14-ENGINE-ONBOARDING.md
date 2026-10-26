@@ -2,8 +2,10 @@
 
 **Authority:** Accepted EA v2.3 and EA-DEV DEV-14; accepted specification
 `shared/docs/architecture/ea-dev-reusable-engine-onboarding-2026-10-23.md`;
-Shared PR #402 merged at
-`9fa1bbd6ad9b5c9d4ec406c721bd75227803dcea`.
+Shared profile contract established in #402, with the corrected Payments
+startup registration in #403 at
+`32b71f3335e566daeb58246f17fcbbf162cf7f53`.
+The connected implementation is Infrastructure #64.
 
 This template never issues an IAM identity, creates a CP Principal, grants a
 Tenant, activates a CapabilityProvider, or certifies production readiness.
@@ -38,8 +40,31 @@ phase intentionally returns `BLOCKED / OWNER_ADAPTER_NOT_IMPLEMENTED`.
 The initial scaffold itself cannot pass onboarding or cause an engine to be
 activated.
 
-An owner implementation should supply an **unprivileged** Python wrapper (the
-native engine remains in its own language) that can:
+The connected controller invokes the following owner phases inside an
+**unprivileged** container. The native engine remains in its own language;
+Infrastructure supplies the bounded `engine_sdk.Driver` and private context.
+No wrapper needs another IAM issuer/bootstrap or access to CP's database.
+
+| Phase | Successful owner observation (only after actual execution) |
+| --- | --- |
+| `prepare` | `{"prepared": true}` after native migrations and reversible seeding |
+| `test` | `{"cases": {...}}` containing every declared **owner** case and actual PASS/FAIL/BLOCKED reasons |
+| `observe` | `{"effects": {...}, "resolutions": [...], "checks": {...}}` from native stores/reads for independent CP audit joins |
+| `unavailable` | `{"observed": true}` after the native endpoint refuses while a real required process is stopped |
+| `denied` | `{"observed": true}` after the native endpoint denies withdrawn/retired/disabled authority without effects |
+| `restored` | `{"observed": true}` after a current authenticated native operation succeeds on recovery |
+
+`case_updates` may accompany the last three observations for declared owner
+cases. They cannot accept common ENG-ONB cases or erase a FAIL. A boolean from
+an owner is insufficient: Infrastructure separately checks native runtime
+identity, current CP resolution deltas, supported durable native audits and
+actual issuer/host cleanup. Preserve unimplemented or unavailable domain cells
+as BLOCKED; never substitute an empty report or component mock for execution.
+
+Readiness uses the descriptor's actual HTTP readiness endpoint, not a successful
+adapter exit. Component-only `readiness`, `migrate`, `seed`, `exercise` and
+`cleanup` probes are retained for compatibility, separately from that connected
+protocol. An owner may use them to:
 - `readiness`: verify the real engine and required dependencies;
 - `migrate`: execute the owner's native migrations against the owned store;
 - `seed`: create reversible synthetic engine-domain records using CP-issued
@@ -70,6 +95,12 @@ harness observes native effects, negative cases and cleanup independently.
 - Add current owner/runbook, explicit rollback and cleanup procedures.
 - Run Actions and Codespaces with comparable receipts; retain different
   machine-environment classifications.
+- Keep startup registration aligned with the owner declaration for providers
+  already listed in Shared's startup bundle index. An omitted invocation clears
+  the route during CP restart; provider metadata drift changes its version.
+- Keep retry business bodies and idempotency keys stable when CP context headers
+  refresh. A lost response can require replay of the same resource; it must not
+  require another commercial or financial execution.
 - Keep staging/production independent. Real Payments sandbox is still
   simulated money and cannot establish PSP qualification.
 

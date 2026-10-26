@@ -1,5 +1,4 @@
 """Test DEV-14 adapter template never claims real runtime acceptance."""
-import importlib.util
 import json
 from pathlib import Path
 import subprocess
@@ -12,7 +11,8 @@ TEMPLATE = Path(__file__).resolve().parents[1] / ".baobab/development_adapter.py
 
 class AdapterTemplateTests(unittest.TestCase):
     def test_all_owner_phases_refuse_until_implemented(self):
-        for phase in ("readiness", "migrate", "seed", "exercise", "cleanup"):
+        for phase in ("readiness", "migrate", "seed", "exercise", "cleanup",
+                      "prepare", "test", "observe", "unavailable", "denied", "restored"):
             with self.subTest(phase=phase):
                 result = subprocess.run([sys.executable, "-B", str(TEMPLATE), phase],
                                         text=True, capture_output=True, timeout=10)
