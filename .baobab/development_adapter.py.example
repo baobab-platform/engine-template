@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+"""DEV-14 owner adapter scaffold (NOT an implemented engine provider).
+
+Copy this example to .baobab/development_adapter.py only when implementing a
+real engine profile. The engine owner must replace every blocked phase with
+native, authenticated, isolated operations and audited effect observations.
+No phase of this unconfigured template may report success.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+
+PHASES = ("readiness", "migrate", "seed", "exercise", "cleanup")
+
+
+def run(phase: str) -> tuple[int, dict]:
+    if phase not in PHASES:
+        raise ValueError("UNKNOWN_ADAPTER_PHASE")
+    # Hard fail for every phase; a template cannot become provider evidence.
+    return 2, {
+        "schema": "baobab.engine-development-adapter-result.v1",
+        "phase": phase,
+        "result": "BLOCKED",
+        "reason": "OWNER_ADAPTER_NOT_IMPLEMENTED",
+        "evidence_class": "SOURCE",
+        "real_native_effect": False,
+        "certified": False,
+        "protected_acceptance": False,
+        "production_authorized": False,
+    }
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("phase", choices=PHASES)
+    args = parser.parse_args(argv)
+    code, receipt = run(args.phase)
+    print(json.dumps(receipt, sort_keys=True))
+    return code
+
+
+if __name__ == "__main__":
+    sys.exit(main())
