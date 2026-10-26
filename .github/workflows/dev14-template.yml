@@ -1,0 +1,30 @@
+name: DEV-14 native adapter template
+on:
+  pull_request:
+    paths:
+      - '.baobab/development_adapter.py.example'
+      - 'docs/DEV14-ENGINE-ONBOARDING.md'
+      - 'tests/test_dev14_template.py'
+      - '.github/workflows/dev14-template.yml'
+  push:
+    branches: [main]
+    paths:
+      - '.baobab/development_adapter.py.example'
+      - 'docs/DEV14-ENGINE-ONBOARDING.md'
+      - 'tests/test_dev14_template.py'
+      - '.github/workflows/dev14-template.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fail-closed-example:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ad3497abcd142e169a10aac37abd5175c44f33c4 # v7.0.0+6
+        with:
+          python-version: '3.13'
+      - name: Adapter cannot self-certify
+        run: python3 -B -m unittest discover -s tests -p 'test_dev14_template.py' -v
