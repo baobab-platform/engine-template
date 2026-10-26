@@ -25,6 +25,6 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@ad3497abcd142e169a10aac37abd5175c44f33c4 # v7.0.0+6
         with:
-          python-version: '3.13'
+          python-version: '3.14'
       - name: Adapter cannot self-certify
         run: python3 -B -m unittest discover -s tests -p 'test_dev14_template.py' -v

@@ -13,7 +13,12 @@ import json
 import sys
 
 
-PHASES = ("readiness", "migrate", "seed", "exercise", "cleanup")
+# Component probes remain separate from the connected lifecycle. Both sets
+# refuse until the owner implements real operations; accepting a CLI argument
+# is never a resource observation or an ENG-ONB pass.
+COMPONENT_PHASES = ("readiness", "migrate", "seed", "exercise", "cleanup")
+CONNECTED_PHASES = ("prepare", "test", "observe", "unavailable", "denied", "restored")
+PHASES = COMPONENT_PHASES + CONNECTED_PHASES
 
 
 def run(phase: str) -> tuple[int, dict]:
